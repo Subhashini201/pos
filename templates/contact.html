@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:400,800" rel="stylesheet">
+    <style>
+        :root {
+            --teal: #00b4cf;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+    background: linear-gradient(90deg, #fffcfe 0%, rgba(61, 46, 232, 0.83) 100%);
+    background-image: url({{ url_for('static', filename='contact.jpg') }});/* Replace 'path/to/your/image.jpg' with the actual path to your image */
+    background-size: contain; /* Ensures that the background image covers the entire background */
+    background-position: center; /* Centers the background image */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    height: 100vh;
+}
+
+
+        .container {
+            background-color: var(--white);
+            border-radius: 5px;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+            position: relative;
+            overflow: hidden;
+            width: 90%;
+            max-width: 768px;
+            min-height: 480px;
+            min-width: 370px;
+            display: flex;
+        }
+
+        .form-container {
+            flex: 1;
+            display: flex;
+        }
+
+        .left-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--teal);
+            color: var(--white);
+            padding: 2rem;
+        }
+
+        .left-inner-container {
+            text-align: center;
+        }
+
+        .right-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .right-inner-container {
+            width: 70%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        input,
+        textarea {
+            background-color: #eee;
+            border: none;
+            padding: 12px 15px;
+            margin: 8px 0;
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: 1px solid var(--teal);
+        }
+
+        button {
+            border-radius: 20px;
+            border: 1px solid var(--teal);
+            background-color: var(--teal);
+            color: #FFFFFF;
+            font-size: 1rem;
+            font-weight: bold;
+            padding: 12px 45px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: transform 80ms ease-in;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.7;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .left-container {
+                display: none;
+            }
+        }
+
+        form p {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        .social-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .social {
+            margin: 0 10px;
+            font-size: 24px;
+            color: var(--teal);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <div class="left-container">
+                <div class="left-inner-container">
+                    <h2>PCOS Healthcare</h2><br>
+                    <p>Our dedicated healthcare team offers personalized support and expert guidance to help you thrive with PCOS. Reach out via the contact form to start your journey towards better health.<br><br> contact number : 55555555</p>
+
+                </div>
+            </div>
+            <div class="right-container">
+                <div class="right-inner-container">
+                    <form action="#">
+                        <h2>Contact</h2><br>
+                        <p>* Required</p>
+                        <div class="social-container">
+                            <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                            <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                        <input type="text" placeholder="Name *" />
+                        <input type="email" placeholder="Email *" />
+                        <input type="tel" placeholder="Phone" />
+                        <textarea rows="4" placeholder="Message"></textarea>
+                        <button>Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}
+

@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    /* CSS for background image */
+    body {
+        /* background-image: url("{{ url_for('static', filename='Web_Photo_Editor.jpg') }}"); */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        margin: 0;
+        /* Remove default margin */
+        padding-top: 900px;
+        background-size: 700px auto;
+        background-attachment: fixed;
+        /* Adjust padding-top to make space for the fixed navigation */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .carousel {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 70%; /* Adjust width as needed */
+        max-width: 1200px; /* Set max-width to avoid overflowing on smaller screens */
+        height: 700px; /* Adjust height as needed */
+        overflow: hidden;
+        background-color: #f0e9e9;
+    }
+
+    .carousel-item {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: none;
+        top: 0;
+        left: 100%;
+        background-color: white;
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+    }
+
+    .carousel-item .slide-image {
+        background-size: contain; /* Ensure the background image covers the entire container */
+        background-repeat: no-repeat;
+        width: 100%; /* Make the image fill its container */
+        height: 100%; /* Make the image fill its container */
+        max-width: 100%; /* Limit image width to prevent overflow */
+        max-height: 100%; /* Limit image height to prevent overflow */
+        background-position: center; /* Center the background image */
+    }
+
+
+    .carousel-item.active {
+        left: 0;
+        transition: all 0.3s ease-out;
+    }
+
+    .carousel-item div {
+        height: 100%;
+    }
+
+    .red {
+        background-color: red;
+    }
+
+    .green {
+        background-color: green;
+    }
+
+    .yellow {
+        background-color: yellow;
+    }
+
+    .violet {
+        background-color: violet;
+    }
+</style>
+</head>
+<div id="flash-messages"></div>
+<body>
+<div class="carousel">
+
+<div class="carousel-item">
+   
+        <div class="slide-image" style="background-image: url('/static/Web_Photo_Editor.jpg');">
+
+    </div>
+</div>
+<div class="carousel-item"><div class="slide-image" style="background-image: url('/static/ppp3.jpg');">
+    </div>
+</div>
+<div class="carousel-item"><div class="slide-image" style="background-image: url('/static/qqq.jpg');">
+    </div>
+</div>
+</div>
+
+<script>
+window.onload = function () {
+    let slides =
+        document.getElementsByClassName('carousel-item');
+
+    function addActive(slide) {
+        slide.classList.add('active');
+    }
+
+    function removeActive(slide) {
+        slide.classList.remove('active');
+    }
+
+    addActive(slides[0]);
+    setInterval(function () {
+        for (let i = 0; i < slides.length; i++) {
+            if (i + 1 == slides.length) {
+                addActive(slides[0]);
+                setTimeout(removeActive, 350, slides[i]);
+                break;
+            }
+            if (slides[i].classList.contains('active')) {
+                setTimeout(removeActive, 350, slides[i]);
+                addActive(slides[i + 1]);
+                break;
+            }
+        }
+    }, 2000);
+};
+
+// Get flash messages from Flask and convert them to JavaScript object
+var flashMessages = {{ get_flashed_messages(with_categories=true)|tojson }};
+    
+    // Get the div container for flash messages
+    var flashContainer = document.getElementById('flash-messages');
+
+    // Loop through each flash message
+    flashMessages.forEach(function(message) {
+        // Create an alert div element
+        var alertDiv = document.createElement('div');
+        alertDiv.className = 'alert alert-' + message[0];
+        alertDiv.textContent = message[1];
+
+        // Append the alert to the flash container
+        flashContainer.appendChild(alertDiv);
+
+        // Automatically remove the alert after 5 seconds
+        setTimeout(function() {
+            alertDiv.remove();
+        }, 5000);
+    });
+</script>
+
+{% endblock %}

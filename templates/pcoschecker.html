@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patient Information Form</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #abccf1; /* Background color */
+        margin: 0;
+        padding: 0;
+    }
+    .highlight-title {
+        background-color: #184372; /* Background color */
+        color: #fff; /* Text color */
+        padding: 1px; /* Padding around the title */
+        border-radius: 5px; /* Rounded corners */
+        margin-bottom: 0px; /* Bottom margin */
+    }
+    .section-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    .section {
+        flex: 1;
+        padding: 0 10px;
+        border-right: 1px solid #ddd;
+    }
+    .section:last-child {
+        border-right: none;
+    }
+    table {
+        width: 100%;
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    .submit-button {
+        background-color: #007bff; /* Background color */
+        color: #fff; /* Text color */
+        border: none; /* Remove border */
+        padding: 10px 20px; /* Padding around the button */
+        border-radius: 10px; /* Rounded corners */
+        cursor: pointer; /* Add cursor pointer on hover */
+        margin-top: 1px; /* Move button slightly to the top */
+    }</style>
+</head>
+<body>
+
+    <div class="highlight-title">
+        <h1>Patient Information Form</h1>
+        <form action="/predict" method="POST">
+<div class="section-container">
+    <section class="section">
+        <h3>Section 1: Personal Information</h3>
+        <table>
+            <tr>
+                <th>1. Name:</th>
+                <td><input type="text" name="name" required></td>
+            </tr>
+            <tr>
+                <th>2. Age (yrs):</th>
+                <td><input type="number" name="age"  step="any"required></td>
+            </tr>
+            <tr>
+                <th>3. Weight (Kg):</th>
+                <td><input type="number" name="weight" step="any" required></td>
+            </tr>
+            <tr>
+                <th>4. Height (Cm):</th>
+                <td><input type="number" name="height" step="any" required></td>
+            </tr>
+            <tr>
+                <th>5. BMI:</th>
+                <td><input type="number" name="bmi" step="any" required></td>
+            </tr>
+            
+        <tr>
+            <th>6. Blood Group:</th>
+            <td><input type="number" name="blood_group" step="any" required></td>
+        </tr>
+
+
+        <tr>
+            <th>7. Pulse rate (bpm):</th>
+            <td><input type="number" name="pulse_rate" step="any" required></td>
+        </tr>
+  
+
+
+        <tr>
+            <th>8. RR (breaths/min):</th>
+            <td><input type="number" name="rr" step="any" required></td>
+        </tr>
+   
+
+
+        <tr>
+            <th>9. Hb (g/dl):</th>
+            <td><input type="number" name="hb" step="any"required></td>
+        </tr>
+  
+
+
+        <tr>
+            <th>10. Cycle (R/I):</th>
+            <td><input type="number" name="cycle" step="any" required></td>
+        </tr>
+  
+
+
+        <tr>
+            <th>11. Cycle length (days):</th>
+            <td><input type="number" name="cycle_length"  step="any"required></td>
+        </tr>
+ 
+        <tr>
+            <th>12. Marriage Status (Yrs):</th>
+            <td><input type="number" name="marriage_status" step="any" required></td>
+        </tr>
+
+        <tr>
+            <th>13. Pregnant (Y/N):</th>
+            <td><input type="number" name="pregnant" step="any" required></td>
+        </tr>
+ 
+
+            
+        </table>
+    </section>
+
+    <section class="section">
+        <h3>Section 2: Medical History</h3>
+        <table>
+            <tr>
+                <th>14. No. of abortions:</th>
+                <td><input type="number" name="abortions"  step="any"required></td>
+            </tr>
+            <tr>
+                <th>15. FSH (mIU/mL):</th>
+                <td><input type="number" name="fsh" step="any" required></td>
+            </tr>
+            <tr>
+                <th>16. LH (mIU/mL):</th>
+                <td><input type="number" name="lh" step="any" required></td>
+            </tr>
+            <tr>
+                <th>17. Hip (inch):</th>
+                <td><input type="number" name="hip"  step="any"required></td>
+            </tr>
+            <tr>
+                <th>18. Waist (inch):</th>
+                <td><input type="number" name="waist" step="any" required></td>
+            </tr>
+            <tr>
+                <th>19. TSH (mIU/L):</th>
+                <td><input type="number" name="tsh" step="any" required></td>
+            </tr>
+            <tr>
+                <th>20. AMH (ng/mL):</th>
+                <td><input type="number" name="amh" step="any" required></td>
+            </tr>
+            <tr>
+                <th>21. PRL (ng/mL):</th>
+                <td><input type="number" name="prl" step="any" required></td>
+            </tr>
+            <tr>
+                <th>22. Vit D3 (ng/mL):</th>
+                <td><input type="number" name="vit_d3" step="any" required></td>
+            </tr>
+            <tr>
+                <th>23. PRG (ng/mL):</th>
+                <td><input type="number" name="prg" step="any" required></td>
+            </tr>
+            <tr>
+                <th>24. RBS (mg/dl):</th>
+                <td><input type="number" name="rbs" step="any" required></td>
+            </tr>
+            <tr>
+                <th>25. Weight gain (Y/N):</th>
+                <td><input type="number" name="weight_gain" step="any" required></td>
+            </tr>
+            <tr>
+                <th>26. Hair growth (Y/N):</th>
+                <td><input type="number" name="hair_growth" step="any" required></td>
+            </tr>
+            
+        </table>
+    </section>
+    
+
+    <section class="section">
+        <h3>Section 3: Health Status</h3>
+        <table>
+            <tr>
+                <th>27. Skin darkening (Y/N):</th>
+                <td><input type="number" name="skin_darkening" step="any" required></td>
+            </tr>
+            <tr>
+                <th>28. Hair loss (Y/N):</th>
+                <td><input type="number" name="hair_loss" step="any" required></td>
+            </tr>
+            <tr>
+                <th>29. Pimples (Y/N):</th>
+                <td><input type="number" name="pimples" step="any" required></td>
+            </tr>
+            <tr>
+                <th>30. Fast food (Y/N):</th>
+                <td><input type="number" name="fast_food" step="any" required></td>
+            </tr>
+            <tr>
+                <th>31. Reg. Exercise (Y/N):</th>
+                <td><input type="number" name="regular_exercise" step="any" required></td>
+            </tr>
+            <tr>
+                <th>32. BP Systolic (mmHg):</th>
+                <td><input type="number" name="bp_systolic" step="any" required></td>
+            </tr>
+            <tr>
+                <th>33. BP Diastolic (mmHg):</th>
+                <td><input type="number" name="bp_diastolic" step="any" required></td>
+            </tr>
+            <tr>
+                <th>34. Follicle No. (L):</th>
+                <td><input type="number" name="follicle_L" step="any" required></td>
+            </tr>
+            <tr>
+                <th>35. Follicle No. (R):</th>
+                <td><input type="number" name="follicle_R" step="any" required></td>
+            </tr>
+            <tr>
+                <th>36. Avg. F size (L) (mm):</th>
+                <td><input type="number" name="avg_f_size_L" step="any" required></td>
+            </tr>
+            <tr>
+                <th>37. Avg. F size (R) (mm):</th>
+                <td><input type="number" name="avg_f_size_R" step="any" required></td>
+            </tr>
+            <tr>
+                <th>38. Endometrium (mm):</th>
+                <td><input type="number" name="endometrium" step="any" required></td>
+            </tr>
+        </table>
+    </section>
+</div>
+<button type="submit" class="submit-button">Submit</button>
+</form>
+    
+</body>
+</html>
+
+
+

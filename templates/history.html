@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+ 
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            color: #333;
+            padding-top: 5%;
+        }
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Your Prediction History</h1>
+    {% if predictions %}
+        <table>
+            <tr>
+                <th>Result</th>
+                <th>Prediciton Type</th>
+                <th>Date</th>
+            </tr>
+            {% for prediction in predictions %}
+                <tr>
+                    <td>{{ prediction.result }}</td>
+                    <td>{{ prediction.prediction_type }}</td>
+                    <td>{{ prediction.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No prediction history found.</p>
+    {% endif %}
+</div>
+
+</body>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Background Image Example</title>
+<style>
+   body {
+    background-image: url('/static/ssm.png');
+    background-size: 80% auto; /* Cover the entire background with automatic height */
+    background-position: center calc(10% + 20px); /* Center the background image vertically at the top */
+    background-repeat: no-repeat; /* Do not repeat the background image */
+    width: 50vw; /* Set width to 100% of viewport width */
+    height: 50vh; /* Set height to 100% of viewport height */
+    padding-top: 5%;
+    /* Optional: Add more styles for the body */
+}
+
+</style>
+</head>
+{% endblock %}

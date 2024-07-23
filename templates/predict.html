@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+ 
+{% block content %}
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCOS Test Result</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #056fa0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        width: 90%;
+        max-width: 600px;
+        text-align: center;
+    }
+
+    .highlight-title h1 {
+        color: #0f65cf;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    table {
+        width: 100%;
+        margin-bottom: 20px;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .result {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .positive {
+        color: #d9534f;
+    }
+
+    .negative {
+        color: #5cb85c;
+    }
+
+    .quote {
+        font-style: italic;
+        margin-top: 10px;
+        color: #777;
+    }
+
+    .save-pdf-button {
+        background-color: #007bff; /* Blue background color */
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="highlight-title">
+        <h1>PCOS Test Result</h1>
+    </div>
+
+    <div>
+        <h2>User Information</h2>
+        <p><strong>Name:</strong> {{ name.strip() }}</p>
+        <p><strong>Age (yrs):</strong> {{ age.strip() }}</p>
+    </div>
+    
+    <div>
+        <h2>PCOS Test Result:</h2>
+        <p class="Result {% if Result == 'Positive' %}positive{% else %}negative{% endif %}">
+            {% if Result == 'Positive' %}
+                Positive
+                <div class="quote">"You are strong enough to face it, brave enough to endure it, and capable enough to handle it."</div>
+            {% else %}
+                Negative
+                <div class="quote">"Every day is a new beginning, take a deep breath and start again."</div>
+            {% endif %}
+        </p>
+        <p>THANK YOU FOR CHECKING, HAVE A NICE DAY!</p><br>
+    </div>
+
+    <button class="save-pdf-button" onclick="saveAsPDF('{{ name }}', '{{ age }}', '{{ prediction }}')">Save Report as PDF</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script>
+        async function saveAsPDF(name, age, prediction) {
+            const { jsPDF } = window.jspdf;
+
+            // Create a new jsPDF instance
+            const doc = new jsPDF();
+
+            // Add content to the PDF
+            doc.text('PCOS Test Result', 10, 10);
+            doc.text('User Information', 10, 20);
+            doc.text(`Name: ${name}`, 20, 30);
+            doc.text(`Age (yrs): ${age}`, 20, 40);
+            doc.text('PCOS Test Result:', 10, 50);
+            doc.text(prediction === '1.0' ? 'Positive' : 'Negative', 20, 60);
+            doc.text(prediction === '1.0' 
+                ? '"You are strong enough to face it, brave enough to endure it, and capable enough to handle it."' 
+                : '"Every day is a new beginning, take a deep breath and start again."', 10, 70, { maxWidth: 180 });
+            doc.text('THANK YOU FOR CHECKING, HAVE A NICE DAY!', 10, 90);
+
+            // Save the PDF
+            doc.save('PCOS_Test_Result.pdf');
+        }
+    </script>
+
+</div>
+
+</body>
+{% endblock %}
+
+ 
+
+

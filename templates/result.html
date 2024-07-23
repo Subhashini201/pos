@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>PCOS Prediction Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color:  #0056b3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 20px;
+            padding: 20px;
+        }
+
+        .result-box {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            min-height: 400px;
+            text-align: center; /* Center-align all text */
+        }
+
+        .result-box h1 {
+            margin-top: 0;
+            color: #333;
+            font-size: 32px; /* Increased font size */
+        }
+
+        .result-box p {
+            margin-bottom: 20px;
+            color: #666;
+            font-size: 18px; /* Increased font size */
+        }
+
+        .result-box p.italic {
+            font-style: italic; /* Italicized text */
+        }
+
+        .result-box b {
+            color: #444;
+            font-size: 18px; /* Increased font size */
+        }
+
+        .highlight {
+            color: #0f65cf; /* Highlight color */
+            font-weight: bold;
+        }
+
+        .result-box img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="result-box">
+            <h1>PCOS Prediction Result</h1><br>
+            <p>Name: <span class="highlight">{{ name }}</span></p>
+            <p>Predicted Class: <span class="highlight">{{ prediction_result }}</span></p><br>
+            <p class="italic">
+                {{ 'The results suggest a low likelihood of PCOS. However, a doctor\'s consultation is recommended for a definitive diagnosis.' 
+                if prediction_result == 'Not Affected' 
+                else 'The results suggest a possibility of PCOS. Please consult a doctor for confirmation.' }}
+            </p><br>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Uploaded Image" style="width: 150px; margin-right: 50px; display: block;">
+                <p style="text-align: center;">{{ filename }}</p>
+              </div>
+              
+              
+
+
+
+
+            <p>THANK YOU FOR CHECKING, HAVE A NICE DAY!</p><br>
+        </div>
+    </div>
+</body>
+{% endblock %}
+
+
+
+
+
+
+

@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services</title>
+    <style>
+        /* Resetting default margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Setting up fonts */
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+            font-size: 15px;
+            line-height: 1.7;
+            color: #333;
+        }
+
+        /* Styling the section */
+        .section {
+            display: flex; /* Use flexbox */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            width: 100%; /* Set the width to 100% of its containing element */
+            max-width: 1500px; /* Limit the maximum width */
+            height: 100vh; /* Set the height to 70% of the viewport height */
+            padding: 70px 0; /* Adjust the top and bottom padding to 70px */
+            background-color: #0f65cf;
+            background-image: url('/static/bgg.png'); /* Add the background image */
+            background-size:cover; /* Cover the entire background */
+            background-repeat: no-repeat; /* Do not repeat the background image */
+            padding-top: 10%;
+        }
+
+
+
+        /* Centering text */
+        .text-center {
+            text-align: center;
+        }
+
+        /* Service container */
+        .service-container {
+            max-width: 700px;
+            margin: 0 auto;
+            overflow: hidden; /* Clear floating */
+        }
+
+        /* Service card */
+        .service-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(236, 228, 228, 0.1);
+            margin-bottom: 40px;
+            float: left; /* Float left */
+            width: calc(50% - 15px); /* Adjust width to fit two cards in a row with margin */
+            margin-right: 40px; /* Add margin between cards */
+        }
+
+        /* Service card heading */
+        .service-card h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        /* Service card content */
+        .service-card p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Button styling */
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #000000;
+            color: white;
+        }
+        /* Service card */
+.service-card {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(236, 228, 228, 0.1);
+    margin-bottom: 40px;
+    width: 100%; /* Each card takes up the full width */
+}
+
+/* Service container */
+.service-container {
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Arrange cards vertically */
+    justify-content: space-between; /* Distribute space between cards */
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="section">
+        <div class="service-container">
+            <div class="text-center">
+                <h2>Our Services</h2>
+            </div>
+            <div id="flash-messages"></div>
+
+            <!-- PCOS Checker Service -->
+            <div class="service-card">
+                <h2>PCOS Checker</h2>
+                <p>Check if you may have PCOS by answering a few simple questions. Early detection can help in better management of PCOS.</p>
+                <a href="{{ url_for('pcos_checker') }}" class="btn">Take the Test</a>
+
+
+
+            </div>
+            <!-- Image Scanning Service -->
+            <div class="service-card">
+                <h2>Image Scanning</h2>
+                <p>Upload images of your medical reports or scans related to PCOS for analysis and interpretation by our experts.</p>
+                <a href="{{ url_for('image_scan') }}" class="btn">Upload Images</a>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get flash messages from Flask and convert them to JavaScript object
+        var flashMessages = {{ get_flashed_messages(with_categories=true)|tojson }};
+    
+        // Get the div container for flash messages
+        var flashContainer = document.getElementById('flash-messages');
+    
+        // Loop through each flash message
+        flashMessages.forEach(function(message) {
+            // Create an alert div element
+            var alertDiv = document.createElement('div');
+            alertDiv.className = 'alert alert-' + message[0];
+            alertDiv.textContent = message[1];
+    
+            // Append the alert to the flash container
+            flashContainer.appendChild(alertDiv);
+    
+            // Automatically remove the alert after 5 seconds
+            setTimeout(function() {
+                alertDiv.remove();
+            }, 5000);
+        });
+    </script>
+</body>
+{% endblock %}
+

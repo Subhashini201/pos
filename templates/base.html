@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Flask App</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- CSS styles -->
+    <style>
+        /* CSS for navigation bar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #1b1b1b;
+            /* Background color for the navigation bar */
+            padding: 13px 0;
+            /* Padding for top and bottom */
+            z-index: 1000;
+            /* Set a higher z-index to ensure the navigation bar appears on top */
+            display: flex;
+            justify-content: center;
+        }
+
+        nav a {
+            color: #f0ebeb;
+            /* Text color for the links */
+            text-decoration: none;
+            /* Remove underline from links */
+            margin: 0 14px;
+            /* Margin between the links */
+            font-size: 16px;
+            /* Font size for the links */
+        }
+
+        nav a:hover {
+            color: rgb(207, 13, 45);
+            /* Text color for the links on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        {% if 'user_id' in session %}
+        <!-- Show these links only if the user is logged in -->
+        <a href="/"><i class="fas fa-home"></i> <b>Home</b></a>
+        <a href="/services"><i class="fas fa-cogs"></i> <b>Services</b></a>
+        <a href="/history"><i class="fas fa-cogs"></i> <b>History</b></a>
+        <a href="/contact"><i class="fas fa-envelope"></i> <b>Contact</b></a>
+        <a href="/logout"><i class="fas fa-sign-out-alt"></i> <b>Logout</b></a>
+        {% elif 'admin_id' in session %}
+        <a href="/"><i class="fas fa-home"></i> <b>Home</b></a>
+        <a href="/admin_dashboard"><i class="fas fa-user"></i> <b>Dashboard</b></a>
+        <a href="/logout"><i class="fas fa-sign-out-alt"></i> <b>Logout</b></a>
+        
+        {% else %}
+
+        <!-- Show these links if the user is not logged in -->
+        <a href="/"><i class="fas fa-home"></i> <b>Home</b></a>
+        <a href="/signup"><i class="fas fa-user-plus"></i> <b>Patient Login</b></a>
+        <a href="/admin"><i class="fas fa-user-plus"></i> <b>Admin Login</b></a>
+        <!-- Example link to admin dashboard -->
+        <a href="/about"><i class="fas fa-info-circle"></i> <b>About</b></a>
+        <!-- Example link to patient registration page -->
+        {% endif %}
+
+
+
+    </nav>
+{% block content %}{% endblock %}
+
+</body>
+</html>

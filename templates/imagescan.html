@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #056fa0;
+        }
+        .container {
+            max-width: 700px;
+            margin: 120px auto 200px; /* Adjust the margin-top and margin-bottom values */
+            padding: 50px;
+            background-color: #f9f9f9;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        #fileTypeOptions {
+            margin-top: 20px; /* Adjust the margin-top value as needed */
+        }
+        #fileDropArea {
+            border: 2px dashed #007bff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        #fileDropArea:hover {
+            background-color: #f0f8ff;
+        }
+        #fileInput {
+            display: none;
+        }
+        #submitBtn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Send Us Your Files 📥</h1>
+    <form id="fileUploadForm" action="/image_scan" method="POST" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="Name" required><br><br>
+        <input type="email" name="email" placeholder="Email" required><br><br>
+        
+        <select id="fileTypes" onchange="updateFileTypes()">
+            <option value="Images">Images</option>
+            <option value="Documents">Documents</option>
+        </select>
+        <p id="fileTypeText">File types:</p>
+        <div id="fileTypeOptions">
+            <!-- File type options will be dynamically added here -->
+        </div>
+
+        <div id="fileDropArea" onclick="document.getElementById('fileInput').click()">
+            <p>Drag and drop files here or click to browse</p>
+            <input type="file" id="fileInput" name="file" multiple>
+        </div>
+        <button type="submit" id="submitBtn">Upload</button>
+    </form>
+    <p id="successMessage"></p>
+</div>
+
+<script>
+    function updateFileTypes() {
+        var selectedFileType = document.getElementById("fileTypes").value;
+        var fileTypeText = "File types: ";
+        var fileTypeOptions = document.getElementById("fileTypeOptions");
+        fileTypeOptions.innerHTML = ''; // Clear previous options
+        
+        switch(selectedFileType) {
+            case "Images":
+                fileTypeText += "(.jpg, .jpeg, .png, .gif)";
+                addCheckbox(fileTypeOptions, "jpg", ".jpg");
+                addCheckbox(fileTypeOptions, "jpeg", ".jpeg");
+                addCheckbox(fileTypeOptions, "png", ".png");
+                addCheckbox(fileTypeOptions, "gif", ".gif");
+                break;
+            case "Documents":
+                fileTypeText += "(.pdf, .doc, .docx)";
+                addCheckbox(fileTypeOptions, "pdf", ".pdf");
+                addCheckbox(fileTypeOptions, "doc", ".doc");
+                addCheckbox(fileTypeOptions, "docx", ".docx");
+                break;
+        }
+        document.getElementById("fileTypeText").innerText = fileTypeText;
+    }
+
+    function addCheckbox(parent, value, label) {
+        var checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.value = value;
+        
+        var checkboxLabel = document.createElement("label");
+        checkboxLabel.appendChild(checkbox);
+        checkboxLabel.appendChild(document.createTextNode(label));
+        
+        parent.appendChild(checkboxLabel);
+    }
+
+    document.getElementById('fileUploadForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        var formData = new FormData(this);
+        fetch('/image_scan', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(filename => {
+            document.getElementById('successMessage').innerText = 'Upload successful!';
+            setTimeout(function() {
+                window.location.href = '/result/' + filename; // Redirect to the result route with the filename
+            }, 2000); // Adjust the delay time as needed (in milliseconds)
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('successMessage').innerText = 'Upload failed!';
+        });
+    });
+</script>
+
+</body>
+</html>
